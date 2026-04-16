@@ -119,6 +119,82 @@ select {
   max-height: 300px;
   overflow: auto;
 }
+  /* ===== CENTER WRAPPER ===== */
+.create-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== CARD ===== */
+.create-card {
+  width: 550px;
+  padding: 50px;
+  border-radius: 25px;
+  background: linear-gradient(145deg,#14002a,#1f003d);
+  box-shadow: 0 0 40px #ff00cc55;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.create-card h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+/* ===== FORM ===== */
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+/* SELECT */
+.form-row select {
+  flex: 1;
+  padding: 15px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  background: #2a2a2a;
+  color: white;
+}
+
+/* BUTTON */
+.form-row button {
+  padding: 15px 25px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  background: linear-gradient(90deg,#ff00cc,#8a2be2);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form-row button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff00cc;
+}
+
+/* RESULT */
+.result-box {
+  margin-top: 25px;
+}
+
+.key {
+  font-size: 22px;
+  color: #00ffcc;
+  margin-bottom: 10px;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(20px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
 </style>
 </head>
 
@@ -153,9 +229,13 @@ select {
     <div class="main">
 
       <!-- CREATE -->
-      <div id="tab-create" class="card tab active">
-        <h2>🔑 Tạo Key</h2>
+<div id="tab-create" class="tab active">
+  <div class="create-wrapper">
 
+    <div class="create-card">
+      <h1>🔑 Tạo Key</h1>
+
+      <div class="form-row">
         <select id="days">
           <option value="1">1 ngày</option>
           <option value="3">3 ngày</option>
@@ -164,10 +244,18 @@ select {
         </select>
 
         <button onclick="createKey()">Tạo Key</button>
+      </div>
 
-        <div class="key" id="result"></div>
+      <div class="result-box">
+        <div id="result" class="key"></div>
         <div id="expire"></div>
       </div>
+
+    </div>
+
+  </div>
+</div>
+
 
       <!-- DEVICE -->
       <div id="tab-device" class="card tab">
