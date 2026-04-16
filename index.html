@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>SERVER API</title>
+<title>SERVER KEY PANEL</title>
 
 <style>
 body {
@@ -15,8 +15,8 @@ body {
 /* ===== LOGIN ===== */
 #loginBox {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,11 +29,6 @@ body {
   border-radius: 20px;
   width: 320px;
   text-align: center;
-  box-shadow: 0 0 30px #ff00cc66;
-}
-
-.login-card h2 {
-  margin-bottom: 20px;
 }
 
 input {
@@ -45,25 +40,29 @@ input {
 }
 
 button {
-  width: 100%;
   padding: 12px;
-  background: linear-gradient(90deg,#ff00cc,#8a2be2);
   border: none;
   border-radius: 10px;
+  cursor: pointer;
+  background: linear-gradient(90deg,#ff00cc,#8a2be2);
   color: white;
   font-weight: bold;
-  cursor: pointer;
 }
 
 /* ===== PANEL ===== */
 #panel {
   display: none;
   height: 100vh;
-  display: flex;
 }
 
+.container {
+  display: flex;
+  height: 100%;
+}
+
+/* sidebar */
 .sidebar {
-  width: 250px;
+  width: 230px;
   background: #14002a;
   padding: 20px;
 }
@@ -72,14 +71,12 @@ button {
   color: #ff66ff;
 }
 
-.menu {
-  margin-top: 30px;
-}
-
-.menu button {
+.sidebar button {
+  width: 100%;
   margin: 10px 0;
 }
 
+/* main */
 .main {
   flex: 1;
   display: flex;
@@ -91,7 +88,7 @@ button {
   background: #120022;
   padding: 40px;
   border-radius: 20px;
-  width: 400px;
+  width: 420px;
   text-align: center;
 }
 
@@ -107,12 +104,27 @@ select {
   font-size: 20px;
   margin-top: 15px;
 }
+
+.tab {
+  display: none;
+}
+
+.active {
+  display: flex;
+}
+
+/* list */
+.list {
+  text-align: left;
+  max-height: 300px;
+  overflow: auto;
+}
 </style>
 </head>
 
 <body>
 
-<!-- ===== LOGIN ===== -->
+<!-- LOGIN -->
 <div id="loginBox">
   <div class="login-card">
     <h2>🔐 Đăng nhập</h2>
@@ -123,49 +135,78 @@ select {
   </div>
 </div>
 
-<!-- ===== PANEL ===== -->
+<!-- PANEL -->
 <div id="panel">
-  <div class="sidebar">
-    <h2>⚡ PANEL</h2>
-    <div class="menu">
-      <button>Tạo Key</button>
-      <button onclick="logout()">Đăng xuất</button>
+  <div class="container">
+
+    <!-- MENU -->
+    <div class="sidebar">
+      <h2>⚡ PANEL</h2>
+      <button onclick="showTab('create')">🔑 Tạo Key</button>
+      <button onclick="showTab('device')">💻 Thông tin máy</button>
+      <button onclick="showTab('history')">📜 Lịch sử key</button>
+      <button onclick="showTab('loginlog')">🔐 Lịch sử login</button>
+      <button onclick="logout()">🚪 Đăng xuất</button>
     </div>
-  </div>
 
-  <div class="main">
-    <div class="card">
-      <h2>🔑 Tạo Key</h2>
+    <!-- MAIN -->
+    <div class="main">
 
-      <select id="days">
-        <option value="1">1 ngày</option>
-        <option value="3">3 ngày</option>
-        <option value="30">30 ngày</option>
-        <option value="365">365 ngày</option>
-      </select>
+      <!-- CREATE -->
+      <div id="tab-create" class="card tab active">
+        <h2>🔑 Tạo Key</h2>
 
-      <button onclick="createKey()">Tạo Key</button>
+        <select id="days">
+          <option value="1">1 ngày</option>
+          <option value="3">3 ngày</option>
+          <option value="30">30 ngày</option>
+          <option value="365">365 ngày</option>
+        </select>
 
-      <div class="key" id="result"></div>
-      <div id="expire"></div>
+        <button onclick="createKey()">Tạo Key</button>
+
+        <div class="key" id="result"></div>
+        <div id="expire"></div>
+      </div>
+
+      <!-- DEVICE -->
+      <div id="tab-device" class="card tab">
+        <h2>💻 Thông tin máy</h2>
+        <div id="deviceInfo"></div>
+      </div>
+
+      <!-- HISTORY KEY -->
+      <div id="tab-history" class="card tab">
+        <h2>📜 Lịch sử tạo key</h2>
+        <div id="historyList" class="list"></div>
+      </div>
+
+      <!-- LOGIN LOG -->
+      <div id="tab-loginlog" class="card tab">
+        <h2>🔐 Lịch sử login</h2>
+        <div id="loginList" class="list"></div>
+      </div>
+
     </div>
   </div>
 </div>
 
 <script>
-const USER = "brian08";
-const PASS = "14072008";
+const USER = "admin";
+const PASS = "123456";
 
-/* ===== LOGIN ===== */
+/* LOGIN */
 function login() {
-  const u = document.getElementById("user").value;
-  const p = document.getElementById("pass").value;
-
-  if (u === USER && p === PASS) {
+  if (user.value === USER && pass.value === PASS) {
     localStorage.setItem("login", "ok");
-    showPanel();
+
+    let logs = JSON.parse(localStorage.getItem("loginLogs") || "[]");
+    logs.push(new Date().toLocaleString());
+    localStorage.setItem("loginLogs", JSON.stringify(logs));
+
+    init();
   } else {
-    document.getElementById("err").innerText = "Sai tài khoản hoặc mật khẩu";
+    err.innerText = "Sai tài khoản!";
   }
 }
 
@@ -174,17 +215,23 @@ function logout() {
   location.reload();
 }
 
-function showPanel() {
-  document.getElementById("loginBox").style.display = "none";
-  document.getElementById("panel").style.display = "flex";
+/* INIT */
+function init() {
+  loginBox.style.display = "none";
+  panel.style.display = "block";
+
+  loadDevice();
+  loadHistory();
+  loadLoginLog();
 }
 
-/* ===== AUTO LOGIN ===== */
-if (localStorage.getItem("login") === "ok") {
-  showPanel();
+/* TAB */
+function showTab(name) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.getElementById("tab-" + name).classList.add("active");
 }
 
-/* ===== CREATE KEY ===== */
+/* CREATE KEY */
 async function createKey() {
   const days = document.getElementById("days").value;
 
@@ -192,24 +239,53 @@ async function createKey() {
   const data = await res.json();
 
   if (data.ok) {
-    document.getElementById("result").innerText = data.key;
+    result.innerText = data.key;
 
     if (data.data.expiresAt) {
-      const d = new Date(data.data.expiresAt);
-      document.getElementById("expire").innerText =
-        "Hết hạn: " + d.toLocaleString();
-    } else {
-      document.getElementById("expire").innerText = "Vĩnh viễn";
+      expire.innerText = "Hết hạn: " + new Date(data.data.expiresAt).toLocaleString();
     }
 
-    // lưu lịch sử
-    let history = JSON.parse(localStorage.getItem("history") || "[]");
+    let history = JSON.parse(localStorage.getItem("keyHistory") || "[]");
     history.push({
       key: data.key,
       time: new Date().toLocaleString()
     });
-    localStorage.setItem("history", JSON.stringify(history));
+    localStorage.setItem("keyHistory", JSON.stringify(history));
+
+    loadHistory();
   }
+}
+
+/* HISTORY */
+function loadHistory() {
+  let h = JSON.parse(localStorage.getItem("keyHistory") || "[]");
+
+  historyList.innerHTML = h.map(x =>
+    `<div>🔑 ${x.key}<br>🕒 ${x.time}</div><hr>`
+  ).join("");
+}
+
+/* LOGIN LOG */
+function loadLoginLog() {
+  let l = JSON.parse(localStorage.getItem("loginLogs") || "[]");
+
+  loginList.innerHTML = l.map(x =>
+    `<div>🟢 ${x}</div><hr>`
+  ).join("");
+}
+
+/* DEVICE */
+function loadDevice() {
+  deviceInfo.innerHTML = `
+  🌐 ${navigator.userAgent}<br><br>
+  💻 ${navigator.platform}<br><br>
+  🌍 ${navigator.language}
+  `;
+}
+
+/* AUTO LOGIN */
+if (localStorage.getItem("login") === "ok") {
+  init();
 }
 </script>
 
