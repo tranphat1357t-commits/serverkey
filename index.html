@@ -2,261 +2,215 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>VIP PANEL</title>
-
-<!-- FONT ĐẸP -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>SERVER API</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
 body {
-  display: flex;
-  height: 100vh;
-  background: linear-gradient(135deg, #1a0033, #2d0066, #ff00cc);
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#2b0066,#ff00cc);
   color: white;
 }
 
-/* ===== SIDEBAR ===== */
+/* ===== LOGIN ===== */
+#loginBox {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg,#1a0033,#660066);
+}
+
+.login-card {
+  background: #120022;
+  padding: 40px;
+  border-radius: 20px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 0 30px #ff00cc66;
+}
+
+.login-card h2 {
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg,#ff00cc,#8a2be2);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ===== PANEL ===== */
+#panel {
+  display: none;
+  height: 100vh;
+  display: flex;
+}
+
 .sidebar {
-  width: 240px;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(10px);
+  width: 250px;
+  background: #14002a;
   padding: 20px;
 }
 
-.logo {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 30px;
+.sidebar h2 {
   color: #ff66ff;
 }
 
+.menu {
+  margin-top: 30px;
+}
+
 .menu button {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
-  border: none;
-  background: rgba(255,255,255,0.05);
-  color: white;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: 0.3s;
+  margin: 10px 0;
 }
 
-.menu button:hover {
-  background: linear-gradient(45deg, #ff00cc, #9900ff);
-}
-
-/* ===== CONTENT ===== */
-.content {
+.main {
   flex: 1;
   display: flex;
-  justify-content: center;   /* ngang */
-  align-items: center;       /* dọc */
-  padding: 40px;
+  justify-content: center;
+  align-items: center;
 }
 
-
-/* CARD */
 .card {
-  width: 100%;
-  max-width: 500px;
-}
-
-
-h2 {
-  margin-bottom: 20px;
-  font-size: 28px;
-}
-
-/* INPUT + SELECT */
-select, button {
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  margin-top: 10px;
-  font-size: 16px;
+  background: #120022;
+  padding: 40px;
+  border-radius: 20px;
+  width: 400px;
+  text-align: center;
 }
 
 select {
   width: 100%;
-}
-
-/* BUTTON */
-.create-btn {
-  width: 100%;
-  margin-top: 15px;
-  background: linear-gradient(45deg, #ff00cc, #9900ff);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* RESULT */
-.result {
-  margin-top: 20px;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
 
 .key {
-  font-size: 22px;
   color: #00ffcc;
-  font-weight: bold;
-}
-
-.expire {
-  color: #ffccff;
-}
-
-/* HISTORY */
-.list {
+  font-size: 20px;
   margin-top: 15px;
-  font-size: 14px;
-  opacity: 0.9;
 }
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-  <div class="logo">⚡ SERVER API  BRIAN CHEAT</div>
-
-  <div class="menu">
-    <button onclick="show('create')">🔑 Tạo Key</button>
-    <button onclick="show('device')">💻 Thông tin máy</button>
-    <button onclick="show('history')">📜 Lịch sử key</button>
-    <button onclick="show('login')">🔐 Lịch sử login</button>
+<!-- ===== LOGIN ===== -->
+<div id="loginBox">
+  <div class="login-card">
+    <h2>🔐 Đăng nhập</h2>
+    <input id="user" placeholder="Tài khoản">
+    <input id="pass" type="password" placeholder="Mật khẩu">
+    <button onclick="login()">Đăng nhập</button>
+    <p id="err" style="color:red"></p>
   </div>
 </div>
 
-<!-- CONTENT -->
-<div class="content">
-
-  <!-- CREATE -->
-  <div id="create" class="card">
-    <h2>🔑 Tạo Key</h2>
-
-    <select id="days">
-      <option value="1">1 ngày</option>
-      <option value="3">3 ngày</option>
-      <option value="30">30 ngày</option>
-      <option value="365">365 ngày</option>
-    </select>
-
-    <button class="create-btn" onclick="createKey()">Tạo Key</button>
-
-    <div class="result">
-      <div class="key" id="key"></div>
-      <div class="expire" id="expire"></div>
+<!-- ===== PANEL ===== -->
+<div id="panel">
+  <div class="sidebar">
+    <h2>⚡ PANEL</h2>
+    <div class="menu">
+      <button>Tạo Key</button>
+      <button onclick="logout()">Đăng xuất</button>
     </div>
   </div>
 
-  <!-- DEVICE -->
-  <div id="device" class="card" style="display:none">
-    <h2>💻 Thông tin máy</h2>
-    <div id="deviceInfo"></div>
-  </div>
+  <div class="main">
+    <div class="card">
+      <h2>🔑 Tạo Key</h2>
 
-  <!-- HISTORY -->
-  <div id="history" class="card" style="display:none">
-    <h2>📜 Lịch sử key</h2>
-    <div id="historyList" class="list"></div>
-  </div>
+      <select id="days">
+        <option value="1">1 ngày</option>
+        <option value="3">3 ngày</option>
+        <option value="30">30 ngày</option>
+        <option value="365">365 ngày</option>
+      </select>
 
-  <!-- LOGIN -->
-  <div id="login" class="card" style="display:none">
-    <h2>🔐 Lịch sử login</h2>
-    <div id="loginList" class="list"></div>
-  </div>
+      <button onclick="createKey()">Tạo Key</button>
 
+      <div class="key" id="result"></div>
+      <div id="expire"></div>
+    </div>
+  </div>
 </div>
 
 <script>
-const API = "https://api-server-key.tranphat1357t.workers.dev";
-const ADMIN = "BRIAN_2008";
+const USER = "admin";
+const PASS = "123456";
 
-// ===== CHUYỂN TAB =====
-function show(id) {
-  ["create","device","history","login"].forEach(x=>{
-    document.getElementById(x).style.display = "none";
-  });
-  document.getElementById(id).style.display = "block";
+/* ===== LOGIN ===== */
+function login() {
+  const u = document.getElementById("user").value;
+  const p = document.getElementById("pass").value;
+
+  if (u === USER && p === PASS) {
+    localStorage.setItem("login", "ok");
+    showPanel();
+  } else {
+    document.getElementById("err").innerText = "Sai tài khoản hoặc mật khẩu";
+  }
 }
 
-// ===== TẠO KEY =====
+function logout() {
+  localStorage.removeItem("login");
+  location.reload();
+}
+
+function showPanel() {
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("panel").style.display = "flex";
+}
+
+/* ===== AUTO LOGIN ===== */
+if (localStorage.getItem("login") === "ok") {
+  showPanel();
+}
+
+/* ===== CREATE KEY ===== */
 async function createKey() {
   const days = document.getElementById("days").value;
 
-  const res = await fetch(`${API}/api/create?admin=${ADMIN}&days=${days}`);
+  const res = await fetch(`https://api-server-key.tranphat1357t.workers.dev/api/create?admin=BRIAN_2008&days=${days}`);
   const data = await res.json();
 
-  if (!data.ok) {
-    alert("Lỗi tạo key");
-    return;
+  if (data.ok) {
+    document.getElementById("result").innerText = data.key;
+
+    if (data.data.expiresAt) {
+      const d = new Date(data.data.expiresAt);
+      document.getElementById("expire").innerText =
+        "Hết hạn: " + d.toLocaleString();
+    } else {
+      document.getElementById("expire").innerText = "Vĩnh viễn";
+    }
+
+    // lưu lịch sử
+    let history = JSON.parse(localStorage.getItem("history") || "[]");
+    history.push({
+      key: data.key,
+      time: new Date().toLocaleString()
+    });
+    localStorage.setItem("history", JSON.stringify(history));
   }
-
-  document.getElementById("key").innerText = data.key;
-
-  if (data.data.expiresAt) {
-    const d = new Date(data.data.expiresAt);
-    document.getElementById("expire").innerText =
-      "Hết hạn: " + d.toLocaleString();
-  } else {
-    document.getElementById("expire").innerText = "Vĩnh viễn";
-  }
-
-  saveHistory(data.key);
 }
-
-// ===== LƯU HISTORY =====
-function saveHistory(key) {
-  let list = JSON.parse(localStorage.getItem("history") || "[]");
-  list.push({ key, time: new Date().toLocaleString() });
-  localStorage.setItem("history", JSON.stringify(list));
-  renderHistory();
-}
-
-// ===== HIỂN THỊ HISTORY =====
-function renderHistory() {
-  const list = JSON.parse(localStorage.getItem("history") || "[]");
-  document.getElementById("historyList").innerHTML =
-    list.map(x => `🔑 ${x.key} - ${x.time}`).join("<br>");
-}
-
-// ===== DEVICE INFO =====
-function loadDevice() {
-  document.getElementById("deviceInfo").innerHTML = `
-    OS: ${navigator.platform} <br>
-    Browser: ${navigator.userAgent} <br>
-    Language: ${navigator.language}
-  `;
-}
-
-// ===== LOGIN HISTORY =====
-function saveLogin() {
-  let list = JSON.parse(localStorage.getItem("login") || "[]");
-  list.push(new Date().toLocaleString());
-  localStorage.setItem("login", JSON.stringify(list));
-}
-
-function renderLogin() {
-  const list = JSON.parse(localStorage.getItem("login") || "[]");
-  document.getElementById("loginList").innerHTML =
-    list.map(x => `🕒 ${x}`).join("<br>");
-}
-
-// INIT
-loadDevice();
-renderHistory();
-renderLogin();
-saveLogin();
 </script>
 
 </body>
