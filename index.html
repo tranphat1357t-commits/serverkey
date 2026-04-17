@@ -323,20 +323,25 @@ style="background:none;font-size:20px;">✖</button>
 </div>
 
 <script>
-const USER = "brian";
-const PASS = "14072008";
-const USER = "tuanankkvu@gmail.com";
-const PASS = "op18092009";
-const USER = "admin";
-const PASS = "123456";
+const ACCOUNTS = [
+  { user: "minhnhatonetop@gmail.com", pass: "minh123456" },
+  { user: "tuanankkvu@gmail.com", pass: "op18092009" },
+  { user: "brian", pass: "14072008" }
+];
+
 
 /* LOGIN */
 function login() {
-  if (user.value === USER && pass.value === PASS) {
+  const u = user.value;
+  const p = pass.value;
+
+  const found = ACCOUNTS.find(acc => acc.user === u && acc.pass === p);
+
+  if (found) {
     localStorage.setItem("login", "ok");
 
     let logs = JSON.parse(localStorage.getItem("loginLogs") || "[]");
-    logs.push(new Date().toLocaleString());
+    logs.push(u + " - " + new Date().toLocaleString());
     localStorage.setItem("loginLogs", JSON.stringify(logs));
 
     init();
@@ -344,6 +349,7 @@ function login() {
     err.innerText = "Sai tài khoản!";
   }
 }
+
 
 function logout() {
   localStorage.removeItem("login");
