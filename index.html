@@ -71,22 +71,32 @@ button {
 
 /* SIDEBAR -> MOBILE TOP MENU */
 .sidebar {
-  width: 100%;
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100%;
+  background: linear-gradient(180deg,#020024,#090979);
+  padding: 20px;
   display: flex;
-  overflow-x: auto;
-  gap: 10px;
-  padding: 10px;
-  background: #14002a;
+  flex-direction: column;
+  gap: 12px;
+  transition: 0.3s;
+  z-index: 99999;
 }
 
-.sidebar h2 {
-  display: none;
+.sidebar.active {
+  left: 0;
 }
 
 .sidebar button {
-  flex: 1;
-  min-width: 120px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
 }
+
 
 /* MAIN */
 .main {
@@ -210,6 +220,21 @@ button {
 
 <body>
 
+<button id="openMenu" style="
+  position:fixed;
+  top:15px;
+  left:15px;
+  z-index:100000;
+  background:#000;
+  color:#fff;
+  border:none;
+  padding:10px;
+  border-radius:8px;
+">
+☰
+</button>
+
+
 <!-- LOGIN -->
 <div id="loginBox">
   <div class="login-card">
@@ -227,6 +252,9 @@ button {
 
     <!-- MENU -->
     <div class="sidebar">
+      <button onclick="document.querySelector('.sidebar').classList.remove('active')" 
+style="background:none;font-size:20px;">✖</button>
+
       <h2>⚡ PANEL</h2>
       <button onclick="showTab('create')">🔑 Tạo Key</button>
       <button onclick="showTab('device')">💻 Thông tin máy</button>
@@ -416,11 +444,27 @@ async function revokeKey(key) {
   }
 }
 
-
 /* AUTO LOGIN */
 if (localStorage.getItem("login") === "ok") {
   init();
 }
+window.addEventListener("load", () => {
+  const sidebar = document.querySelector(".sidebar");
+  const openBtn = document.getElementById("openMenu");
+
+  openBtn.onclick = () => {
+    sidebar.classList.add("active");
+  };
+
+  document.addEventListener("click", (e) => {
+    if (!sidebar.contains(e.target) && e.target !== openBtn) {
+      sidebar.classList.remove("active");
+    }
+  });
+});
+
+
+
 </script>
 
 </body>
