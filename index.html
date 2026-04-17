@@ -358,10 +358,29 @@ async function createKey() {
 function loadHistory() {
   let h = JSON.parse(localStorage.getItem("keyHistory") || "[]");
 
-  historyList.innerHTML = h.map(x =>
-    `<div>🔑 ${x.key}<br>🕒 ${x.time}</div><hr>`
-  ).join("");
+  historyList.innerHTML = h.map(x => `
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      
+      <div>
+        🔑 ${x.key}<br>
+        🕒 ${x.time}
+      </div>
+
+      <button onclick="revokeKey('${x.key}')" 
+        style="
+          background:red;
+          padding:8px 12px;
+          border-radius:8px;
+          font-size:12px;
+        ">
+        Khóa Key
+      </button>
+
+    </div>
+    <hr>
+  `).join("");
 }
+
 
 /* LOGIN LOG */
 function loadLoginLog() {
@@ -380,6 +399,23 @@ function loadDevice() {
   🌍 ${navigator.language}
   `;
 }
+  // ===== REVOKE KEY =====
+async function revokeKey(key) {
+  if (!confirm("Bạn chắc chắn muốn khóa key này?")) return;
+
+  const res = await fetch(
+    `https://api-server-key.tranphat1357t.workers.dev/api/revoke?admin=BRIAN_2008&key=${key}`
+  );
+
+  const data = await res.json();
+
+  if (data.ok) {
+    alert("✅ Đã khóa key: " + key);
+  } else {
+    alert("❌ Lỗi: " + data.error);
+  }
+}
+
 
 /* AUTO LOGIN */
 if (localStorage.getItem("login") === "ok") {
