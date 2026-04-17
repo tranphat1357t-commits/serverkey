@@ -285,6 +285,8 @@ style="background:none;font-size:20px;">✖</button>
           <option value="30">30 ngày</option>
           <option value="365">365 ngày</option>
         </select>
+         <input id="maxDevices" type="number" placeholder="Số thiết bị (1-200)" min="1" max="200">
+
 
         <button onclick="createKey()">Tạo Key</button>
       </div>
@@ -375,8 +377,17 @@ function showTab(name) {
 /* CREATE KEY */
 async function createKey() {
   const days = document.getElementById("days").value;
+  let maxDevices = parseInt(document.getElementById("maxDevices").value || "1");
 
-  const res = await fetch(`https://api-server-key.tranphat1357t.workers.dev/api/create?admin=BRIAN_2008&days=${days}`);
+  if (maxDevices < 1 || maxDevices > 200) {
+    alert("Số thiết bị phải từ 1-200");
+    return;
+  }
+
+  const res = await fetch(
+    `https://api-server-key.tranphat1357t.workers.dev/api/create?admin=BRIAN_2008&days=${days}&maxDevices=${maxDevices}`
+  );
+
   const data = await res.json();
 
   if (data.ok) {
@@ -389,13 +400,15 @@ async function createKey() {
     let history = JSON.parse(localStorage.getItem("keyHistory") || "[]");
     history.push({
       key: data.key,
-      time: new Date().toLocaleString()
+      time: new Date().toLocaleString(),
+      devices: maxDevices
     });
     localStorage.setItem("keyHistory", JSON.stringify(history));
 
     loadHistory();
   }
 }
+
 
 /* HISTORY */
 function loadHistory() {
