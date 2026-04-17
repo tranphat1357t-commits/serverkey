@@ -12,7 +12,10 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(135deg,#2b0066,#ff00cc);
   color: white;
+
+  overflow-x: hidden; /* 👈 DÁN Ở ĐÂY */
 }
+
 
 /* ===== LOGIN ===== */
 #loginBox {
@@ -73,7 +76,7 @@ button {
 .sidebar {
   position: fixed;
   top: 0;
-  left: -260px; /* 👈 QUAN TRỌNG */
+  left: -280px; /* 👈 tăng thêm để ẩn hẳn */
   width: 260px;
   height: 100%;
   background: linear-gradient(180deg,#020024,#090979);
@@ -81,9 +84,10 @@ button {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: 0.3s;
+  transition: 0.3s ease;
   z-index: 99999;
 }
+
 
 
 .sidebar.active {
