@@ -219,6 +219,36 @@ button {
     width: auto;
   }
 }
+/* ===== FILE UI UPGRADE ===== */
+
+.file-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+@media (min-width: 768px) {
+  .file-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.file-card {
+  background: linear-gradient(145deg, #020617, #0f172a);
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 0 20px #00000050;
+  transition: 0.3s;
+}
+
+.file-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 0 25px #00ccff55;
+}
+
+.file-card h3 {
+  ma
 
 </style>
 </head>
