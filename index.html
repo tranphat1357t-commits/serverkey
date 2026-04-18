@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SERVER KEY BRIAN</title>
+<title>API KEY BRIAN</title>
 
 <style>
 body {
@@ -292,9 +292,16 @@ style="background:none;font-size:20px;">✖</button>
       </div>
 
       <div class="result-box">
-        <div id="result" class="key"></div>
+       <div id="result" class="key"></div>
+       <button onclick="copyKey()" style="
+         margin-top:10px;
+         background:#00ccff;
+       ">
+    📋 Sao chép
+      </button>
         <div id="expire"></div>
-      </div>
+</div>
+
 
     </div>
 
@@ -470,6 +477,22 @@ async function revokeKey(key) {
   } else {
     alert("❌ Lỗi: " + data.error);
   }
+}
+function copyKey() {
+  const key = document.getElementById("result").innerText;
+
+  if (!key) {
+    alert("Chưa có key để copy!");
+    return;
+  }
+
+  navigator.clipboard.writeText(key)
+    .then(() => {
+      alert("✅ Đã sao chép key!");
+    })
+    .catch(() => {
+      alert("❌ Không thể sao chép!");
+    });
 }
 
 /* AUTO LOGIN */
