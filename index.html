@@ -459,7 +459,6 @@ function init() {
   loadDevice();
   loadHistory();
   loadLoginLog();
-  resetTimer();
 }
 
 /* TAB */
@@ -600,26 +599,6 @@ window.addEventListener("load", () => {
     }
   });
 });
-  let timeout;
-
-// thời gian timeout (ms) → 10 phút
-const TIMEOUT = 10 * 60 * 1000;
-
-function resetTimer() {
-  clearTimeout(timeout);
-  timeout = setTimeout(() => {
-    alert("⏰ Phiên đăng nhập đã hết hạn!");
-    logout();
-  }, TIMEOUT);
-}
-
-// reset khi có hoạt động
-["click", "mousemove", "keydown", "scroll", "touchstart"].forEach(evt => {
-  document.addEventListener(evt, resetTimer);
-});
-
-
-
 
 </script>
 
