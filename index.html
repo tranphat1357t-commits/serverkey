@@ -10,11 +10,11 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: radial-gradient(circle at top, #1e3a8a, #020617 70%);
+  background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
   color: white;
-  overflow-x: hidden;
-}
 
+  overflow-x: hidden; /* 👈 DÁN Ở ĐÂY */
+}
 
 
 /* ===== LOGIN ===== */
@@ -37,31 +37,27 @@ body {
   text-align: center;
 }
 
-input, select {
-  background: rgba(255,255,255,0.05);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
+/* INPUT */
+input {
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
 }
-
-input:focus, select:focus {
-  outline: none;
-  border: 1px solid #00ccff;
-}
-
 
 /* BUTTON */
 button {
-  background: linear-gradient(90deg,#00ccff,#8a2be2);
-  box-shadow: 0 0 10px #00ccff55;
-  transition: 0.2s;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: linear-gradient(90deg,#ff00cc,#8a2be2);
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
 }
-
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #00ccff;
-}
-
 
 /* ===== PANEL ===== */
 #panel {
@@ -117,14 +113,25 @@ button:hover {
 }
 
 /* CARD */
-.card, .create-card {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 0 40px rgba(0,0,0,0.4);
+.card {
+  background: #120022;
+  padding: 25px;
   border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
 }
 
+/* CREATE CARD */
+.create-card {
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #020617, #0f172a);
+  box-shadow: 0 0 30px #ff00cc55;
+  text-align: center;
+}
 
 .create-card h1 {
   font-size: 24px;
@@ -180,19 +187,9 @@ button:hover {
   display: none;
 }
 
-.tab.active {
+.active {
   display: flex;
-  width: 100%;
 }
-.main {
-  position: relative;
-}
-hr {
-  pointer-events: none;
-}
-
-
-
 
 /* ===== DESKTOP (>=768px) ===== */
 @media (min-width: 768px) {
@@ -201,20 +198,26 @@ hr {
     flex-direction: row;
   }
 
-.sidebar {
-  background: rgba(2,6,23,0.9);
-  backdrop-filter: blur(20px);
-  border-right: 1px solid rgba(255,255,255,0.1);
-}
+  .sidebar {
+    width: 220px;
+    flex-direction: column;
+  }
 
-.sidebar button {
-  transition: 0.25s;
-}
+  .sidebar h2 {
+    display: block;
+  }
 
-.sidebar button:hover {
-  background: linear-gradient(90deg,#00ccff,#8a2be2);
-  transform: translateX(5px);
-}
+  .sidebar button {
+    width: 100%;
+  }
+
+  .form-row {
+    flex-direction: row;
+  }
+
+  .form-row button {
+    width: auto;
+  }
 }
 /* ===== FILE UI UPGRADE ===== */
 
@@ -245,10 +248,7 @@ hr {
 }
 
 .file-card h3 {
-  margin: 0;
-  font-size: 18px;
-}
-
+  ma
 
 </style>
 </head>
