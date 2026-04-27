@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>API KEY BRIAN</title>
-
 <style>
 body {
   margin: 0;
@@ -13,11 +11,8 @@ body {
   background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
   color: white;
 
-  overflow-x: hidden; /* 👈 DÁN Ở ĐÂY */
+  overflow-x: hidden;
 }
-
-
-/* ===== LOGIN ===== */
 #loginBox {
   position: fixed;
   width: 100%;
@@ -27,7 +22,6 @@ body {
   align-items: center;
   background: linear-gradient(135deg,#1a0033,#660066);
 }
-
 .login-card {
   background: #120022;
   padding: 25px;
@@ -36,8 +30,6 @@ body {
   max-width: 350px;
   text-align: center;
 }
-
-/* INPUT */
 input {
   width: 100%;
   padding: 14px;
@@ -46,8 +38,6 @@ input {
   border: none;
   font-size: 16px;
 }
-
-/* BUTTON */
 button {
   padding: 14px;
   border: none;
@@ -58,25 +48,19 @@ button {
   font-weight: bold;
   font-size: 15px;
 }
-
-/* ===== PANEL ===== */
 #panel {
   display: none;
   height: 100vh;
 }
-
-/* FLEX MOBILE */
 .container {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
-
-/* SIDEBAR -> MOBILE TOP MENU */
 .sidebar {
   position: fixed;
   top: 0;
-  left: -280px; /* 👈 tăng thêm để ẩn hẳn */
+  left: -280px; 
   width: 260px;
   height: 100%;
   background: linear-gradient(180deg, #020617, #0f172a, #1e293b);
@@ -87,13 +71,9 @@ button {
   transition: 0.3s ease;
   z-index: 99999;
 }
-
-
-
 .sidebar.active {
   left: 0;
 }
-
 .sidebar button {
   width: 100%;
   padding: 14px;
@@ -101,9 +81,6 @@ button {
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(10px);
 }
-
-
-/* MAIN */
 .main {
   flex: 1;
   display: flex;
@@ -111,8 +88,6 @@ button {
   align-items: center;
   padding: 15px;
 }
-
-/* CARD */
 .card {
   background: #120022;
   padding: 25px;
@@ -121,8 +96,6 @@ button {
   max-width: 500px;
   text-align: center;
 }
-
-/* CREATE CARD */
 .create-card {
   width: 100%;
   max-width: 500px;
@@ -132,20 +105,15 @@ button {
   box-shadow: 0 0 30px #ff00cc55;
   text-align: center;
 }
-
 .create-card h1 {
   font-size: 24px;
   margin-bottom: 20px;
 }
-
-/* FORM */
 .form-row {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-
-/* SELECT */
 .form-row select {
   width: 100%;
   padding: 14px;
@@ -155,85 +123,63 @@ button {
   background: #2a2a2a;
   color: white;
 }
-
-/* BUTTON */
 .form-row button {
   width: 100%;
   padding: 14px;
   font-size: 16px;
 }
-
-/* RESULT */
 .result-box {
   margin-top: 20px;
 }
-
 .key {
   font-size: 18px;
   color: #00ffcc;
   word-break: break-all;
 }
-
-/* LIST */
 .list {
   text-align: left;
   max-height: 250px;
   overflow: auto;
   font-size: 14px;
 }
-
-/* TAB */
 .tab {
   display: none;
 }
-
 .active {
   display: flex;
 }
-
-/* ===== DESKTOP (>=768px) ===== */
 @media (min-width: 768px) {
-
   .container {
     flex-direction: row;
   }
-
   .sidebar {
     width: 220px;
     flex-direction: column;
   }
-
   .sidebar h2 {
     display: block;
   }
-
   .sidebar button {
     width: 100%;
   }
-
   .form-row {
     flex-direction: row;
   }
-
   .form-row button {
     width: auto;
   }
 }
-/* ===== FILE UI UPGRADE ===== */
-
 .file-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 15px;
   margin-top: 15px;
 }
-
 @media (min-width: 768px) {
   .file-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
 .file-card {
   background: linear-gradient(145deg, #020617, #0f172a);
   padding: 20px;
@@ -241,18 +187,26 @@ button {
   box-shadow: 0 0 20px #00000050;
   transition: 0.3s;
 }
-
 .file-card:hover {
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 0 25px #00ccff55;
 }
-
-
+.file-item {
+  background: rgba(255,255,255,0.05);
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+  text-align: center;
+}
+.file-item:hover {
+  background: rgba(0, 204, 255, 0.2);
+  transform: scale(1.05);
+}
 </style>
 </head>
-
 <body>
-
 <button id="openMenu" style="
   position:fixed;
   top:15px;
@@ -266,9 +220,6 @@ button {
 ">
 ☰
 </button>
-
-
-<!-- LOGIN -->
 <div id="loginBox">
   <div class="login-card">
     <h2>🔐 Đăng nhập</h2>
@@ -278,16 +229,11 @@ button {
     <p id="err" style="color:red"></p>
   </div>
 </div>
-
-<!-- PANEL -->
 <div id="panel">
   <div class="container">
-
-    <!-- MENU -->
     <div class="sidebar">
       <button onclick="document.querySelector('.sidebar').classList.remove('active')" 
 style="background:none;font-size:20px;">✖</button>
-
       <h2>API KEY BRIAN</h2>
       <button onclick="showTab('create')">🔑 Tạo Key</button>
       <button onclick="showTab('files')">📂 Link File</button>
@@ -296,17 +242,12 @@ style="background:none;font-size:20px;">✖</button>
       <button onclick="showTab('loginlog')">🔐 Lịch sử login</button>
       <button onclick="logout()">🚪 Đăng xuất</button>
     </div>
-
-    <!-- MAIN -->
     <div class="main">
-
-      <!-- CREATE -->
 <div id="tab-create" class="tab active">
   <div class="create-wrapper">
 
     <div class="create-card">
       <h1>🔑 Tạo Key</h1>
-
       <div class="form-row">
         <select id="days">
           <option value="1">1 ngày</option>
@@ -319,12 +260,9 @@ style="background:none;font-size:20px;">✖</button>
           <option value="30">30 ngày</option>
           <option value="365">365 ngày</option>
         </select>
-         <input id="maxDevices" type="number" placeholder="Số thiết bị (1-200)" min="1" max="200">
-
-
+         <input id="maxDevices" type="number" placeholder="Số thiết bị (1-1000)" min="1" max="1000">
         <button onclick="createKey()">Tạo Key</button>
       </div>
-
       <div class="result-box">
        <div id="result" class="key"></div>
        <button onclick="copyKey()" style="
@@ -335,69 +273,49 @@ style="background:none;font-size:20px;">✖</button>
       </button>
         <div id="expire"></div>
 </div>
-
-
     </div>
 
   </div>
 </div>
-      <!-- FILE LINKS -->
 <div id="tab-files" class="card tab">
   <h2>📂 Link File</h2>
+  <div class="file-grid">
+    <div class="file-card">
+      <h3>🧠 Brian</h3>
 
-  <!-- Brian -->
-  <h3>🧠 Brian</h3>
-  <div class="list">
-    <div>
-      📥 <a href="https://www.mediafire.com/file/yp74fokeoqdql19/HyperHead.apk/file" target="_blank">
-        HyperHead APK
-      </a>
+      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/yp74fokeoqdql19/HyperHead.apk/file')">
+        📥 HyperHead APK
+      </div>
+
+      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/p92vmbjbwbe9jxw/BRIAN+X+MEW.mobileconfig/file')">
+        ⚙️ HyperHead Config
+      </div>
     </div>
-    <div>
-      ⚙️ <a href="https://www.mediafire.com/file/p92vmbjbwbe9jxw/BRIAN+X+MEW.mobileconfig/file" target="_blank">
-        HyperHead Config
-      </a>
+    <div class="file-card">
+      <h3>🍎 Tuấn Anh IOS</h3>
+
+      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/agv29fpkz1u91av/AIMLOCKMODUN.apk/file')">
+        📥 AIMLOCKMODE APK
+      </div>
+
+      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/4dzqdujfi4d8vyk/AIMLOCKMODE.mobileconfig/file')">
+        ⚙️ AIMLOCKMODE Config
+      </div>
     </div>
+    <div class="file-card">
+      <h3>🔥 Minh Nhật IOS</h3>
+
+      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/1krpe0dpgo4k8bl/AimHeadMinhNhat.apk/file')">
+        📥 AimHead APK
+      </div>
+
+      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/1krpe0dpgo4k8bl/AimHeadMinhNhat.apk/file')">
+        ⚙️ AimHead Config
+      </div>
+    </div>
+
   </div>
-
-  <hr>
-
-  <!-- Tuấn Anh -->
-  <h3>🍎 Tuấn Anh IOS</h3>
-  <div class="list">
-    <div>
-      📥 <a href="https://www.mediafire.com/file/agv29fpkz1u91av/AIMLOCKMODUN.apk/file" target="_blank">
-        𝐀𝐈𝐌𝐋𝐎𝐂𝐊𝐌𝐎𝐃𝐄 APK
-      </a>
-    </div>
-    <div>
-      ⚙️ <a href="https://www.mediafire.com/file/4dzqdujfi4d8vyk/AIMLOCKMODE.mobileconfig/file" target="_blank">
-        𝐀𝐈𝐌𝐋𝐎𝐂𝐊𝐌𝐎𝐃𝐄 Config
-      </a>
-    </div>
-  </div>
-
-  <hr>
-
-  <!-- Minh Nhật -->
-  <h3>🔥 Minh Nhật IOS</h3>
-  <div class="list">
-    <div>
-      📥 <a href="https://www.mediafire.com/file/1krpe0dpgo4k8bl/AimHeadMinhNhat.apk/file" target="_blank">
-        AimHead APK
-      </a>
-    </div>
-    <div>
-      ⚙️ <a href="https://www.mediafire.com/file/1krpe0dpgo4k8bl/AimHeadMinhNhat.apk/file" target="_blank">
-        AimHead Config
-      </a>
-    </div>
-  </div>
-
 </div>
-
-
-
       <!-- DEVICE -->
       <div id="tab-device" class="card tab">
         <h2>💻 Thông tin máy</h2>
@@ -419,80 +337,70 @@ style="background:none;font-size:20px;">✖</button>
     </div>
   </div>
 </div>
-
 <script>
+let logoutTimer;
+const AUTO_LOGOUT_TIME = 5 * 60 * 1000;
+function resetLogoutTimer() {
+  clearTimeout(logoutTimer);
+  localStorage.setItem("expireTime", Date.now() + AUTO_LOGOUT_TIME);
+
+  logoutTimer = setTimeout(() => {
+    alert("⏰ Hết thời gian! Tự động đăng xuất.");
+    logout();
+  }, AUTO_LOGOUT_TIME);
+}
 const ACCOUNTS = [
   { user: "minhnhatonetop@gmail.com", pass: "minh123456" },
   { user: "tuanankkvu@gmail.com", pass: "op2009" },
   { user: "brian", pass: "14072008" }
 ];
-
-
-/* LOGIN */
 function login() {
   const u = user.value;
   const p = pass.value;
-
   const found = ACCOUNTS.find(acc => acc.user === u && acc.pass === p);
-
   if (found) {
-    localStorage.setItem("login", "ok");
-
+    localStorage.setItem("expireTime", Date.now() + AUTO_LOGOUT_TIME);
     let logs = JSON.parse(localStorage.getItem("loginLogs") || "[]");
     logs.push(u + " - " + new Date().toLocaleString());
     localStorage.setItem("loginLogs", JSON.stringify(logs));
-
     init();
   } else {
     err.innerText = "Sai tài khoản!";
   }
 }
-
-
 function logout() {
   localStorage.removeItem("login");
+  localStorage.removeItem("expireTime"); // 👈 thêm
   location.reload();
 }
-
-/* INIT */
 function init() {
   loginBox.style.display = "none";
   panel.style.display = "block";
-
   loadDevice();
   loadHistory();
   loadLoginLog();
+  resetLogoutTimer();
 }
-
-/* TAB */
 function showTab(name) {
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   document.getElementById("tab-" + name).classList.add("active");
 }
-
-/* CREATE KEY */
 async function createKey() {
   const days = document.getElementById("days").value;
   let maxDevices = parseInt(document.getElementById("maxDevices").value || "1");
-
   if (maxDevices < 1 || maxDevices > 200) {
     alert("Số thiết bị phải từ 1-200");
     return;
   }
-
   const res = await fetch(
     `https://api-server-key.tranphat1357t.workers.dev/api/create?admin=BRIAN_2008&days=${days}&maxDevices=${maxDevices}`
   );
-
   const data = await res.json();
-
   if (data.ok) {
     result.innerText = data.key;
-
     if (data.data.expiresAt) {
       expire.innerText = "Hết hạn: " + new Date(data.data.expiresAt).toLocaleString();
     }
-
     let history = JSON.parse(localStorage.getItem("keyHistory") || "[]");
     history.push({
       key: data.key,
@@ -500,24 +408,17 @@ async function createKey() {
       devices: maxDevices
     });
     localStorage.setItem("keyHistory", JSON.stringify(history));
-
     loadHistory();
   }
 }
-
-
-/* HISTORY */
 function loadHistory() {
   let h = JSON.parse(localStorage.getItem("keyHistory") || "[]");
-
   historyList.innerHTML = h.map(x => `
-    <div style="display:flex;justify-content:space-between;align-items:center;">
-      
+    <div style="display:flex;justify-content:space-between;align-items:center;">   
       <div>
         🔑 ${x.key}<br>
         🕒 ${x.time}
       </div>
-
       <button onclick="revokeKey('${x.key}')" 
         style="
           background:red;
@@ -527,23 +428,16 @@ function loadHistory() {
         ">
         Khóa Key
       </button>
-
     </div>
     <hr>
   `).join("");
 }
-
-
-/* LOGIN LOG */
 function loadLoginLog() {
   let l = JSON.parse(localStorage.getItem("loginLogs") || "[]");
-
   loginList.innerHTML = l.map(x =>
     `<div>🟢 ${x}</div><hr>`
   ).join("");
 }
-
-/* DEVICE */
 function loadDevice() {
   deviceInfo.innerHTML = `
   🌐 ${navigator.userAgent}<br><br>
@@ -551,16 +445,12 @@ function loadDevice() {
   🌍 ${navigator.language}
   `;
 }
-  // ===== REVOKE KEY =====
 async function revokeKey(key) {
   if (!confirm("Bạn chắc chắn muốn khóa key này?")) return;
-
   const res = await fetch(
     `https://api-server-key.tranphat1357t.workers.dev/api/revoke?admin=BRIAN_2008&key=${key}`
   );
-
   const data = await res.json();
-
   if (data.ok) {
     alert("✅ Đã khóa key: " + key);
   } else {
@@ -569,12 +459,10 @@ async function revokeKey(key) {
 }
 function copyKey() {
   const key = document.getElementById("result").innerText;
-
   if (!key) {
     alert("Chưa có key để copy!");
     return;
   }
-
   navigator.clipboard.writeText(key)
     .then(() => {
       alert("✅ Đã sao chép key!");
@@ -583,27 +471,24 @@ function copyKey() {
       alert("❌ Không thể sao chép!");
     });
 }
-
-/* AUTO LOGIN */
-if (localStorage.getItem("login") === "ok") {
-  init();
-}
 window.addEventListener("load", () => {
   const sidebar = document.querySelector(".sidebar");
   const openBtn = document.getElementById("openMenu");
-
   openBtn.onclick = () => {
     sidebar.classList.add("active");
   };
-
   document.addEventListener("click", (e) => {
     if (!sidebar.contains(e.target) && e.target !== openBtn) {
       sidebar.classList.remove("active");
     }
   });
 });
-
+["click", "mousemove", "keydown", "touchstart"].forEach(event => {
+  document.addEventListener(event, resetLogoutTimer);
+});
+function openLink(url) {
+  window.open(url, "_blank");
+}
 </script>
-
 </body>
 </html>
