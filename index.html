@@ -3,15 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>API KEY BRIAN</title>
+<title>𝑨𝑷𝑰 𝑲𝑬𝒀 𝑩𝑹𝑰𝑨𝑵</title>
 <style>
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
+  background: url('https://sf-static.upanhlaylink.com/img/image_202604292be7d99f6d81d241b901050384d59134.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: white;
-
   overflow-x: hidden;
+  position: relative;
+}
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(3px);
+  z-index: -1;
 }
 #loginBox {
   position: fixed;
@@ -20,15 +29,30 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg,#1a0033,#660066);
+  background: url('https://sf-static.upanhlaylink.com/img/image_202604292be7d99f6d81d241b901050384d59134.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
 }
-.login-card {
-  background: #120022;
+#loginBox::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+}
+.login-card{
+  position: relative;
+  z-index: 2;
+  background: rgba(18, 0, 34, 0.75);
+  backdrop-filter: blur(12px);
   padding: 25px;
   border-radius: 20px;
   width: 90%;
   max-width: 350px;
   text-align: center;
+
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 30px #ff00cc55;
 }
 input {
   width: 100%;
@@ -222,7 +246,7 @@ button {
 </button>
 <div id="loginBox">
   <div class="login-card">
-    <h2>🔐 Đăng nhập</h2>
+    <h2>🔐 Login Server Key</h2>
     <input id="user" placeholder="Tài khoản">
     <input id="pass" type="password" placeholder="Mật khẩu">
     <button onclick="login()">Đăng nhập</button>
@@ -292,17 +316,6 @@ style="background:none;font-size:20px;">✖</button>
       </div>
     </div>
     <div class="file-card">
-      <h3>🍎 Tuấn Anh IOS</h3>
-
-      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/agv29fpkz1u91av/AIMLOCKMODUN.apk/file')">
-        📥 AIMLOCKMODE APK
-      </div>
-
-      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/4dzqdujfi4d8vyk/AIMLOCKMODE.mobileconfig/file')">
-        ⚙️ AIMLOCKMODE Config
-      </div>
-    </div>
-    <div class="file-card">
       <h3>🔥 Minh Nhật IOS</h3>
 
       <div class="file-item" onclick="openLink('https://www.mediafire.com/file/1krpe0dpgo4k8bl/AimHeadMinhNhat.apk/file')">
@@ -324,7 +337,7 @@ style="background:none;font-size:20px;">✖</button>
 
       <!-- HISTORY KEY -->
       <div id="tab-history" class="card tab">
-        <h2>📜 Lịch sử tạo key</h2>
+        <h2>📜 Lịch sử</h2>
         <div id="historyList" class="list"></div>
       </div>
 
