@@ -422,8 +422,8 @@ function showTab(name) {
 async function createKey() {
   const days = document.getElementById("days").value;
   let maxDevices = parseInt(document.getElementById("maxDevices").value || "1");
-  if (maxDevices < 1 || maxDevices > 200) {
-    alert("Số thiết bị phải từ 1-200");
+  if (maxDevices < 1 || maxDevices > 1000) {
+    alert("Số thiết bị phải từ 1-1000");
     return;
   }
   const res = await fetch(
