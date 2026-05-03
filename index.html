@@ -8,19 +8,18 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: url('https://sf-static.upanhlaylink.com/img/image_202604292be7d99f6d81d241b901050384d59134.jpg') no-repeat center center fixed;
-  background-size: cover;
   color: white;
   overflow-x: hidden;
   position: relative;
 }
-body::before{
+
+body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(3px);
-  z-index: -1;
+  background: url('https://sf-static.upanhlaylink.com/img/image_202604292be7d99f6d81d241b901050384d59134.jpg') no-repeat center center;
+  background-size: cover;
+  z-index: -2;
 }
 #loginBox {
   position: fixed;
@@ -120,45 +119,84 @@ button {
   max-width: 500px;
   text-align: center;
 }
+.create-wrapper{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:15px;
+  box-sizing:border-box;
+}
+
 .create-card {
   width: 100%;
-  max-width: 500px;
-  padding: 30px;
+  max-width: 420px;
+  padding: 20px;
   border-radius: 20px;
   background: linear-gradient(145deg, #020617, #0f172a);
-  box-shadow: 0 0 30px #ff00cc55;
+  box-shadow: 0 0 25px #ff00cc55;
   text-align: center;
+  box-sizing: border-box;
 }
+
 .create-card h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 22px;
+  margin-bottom: 18px;
 }
+
 .form-row {
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-.form-row select {
   width: 100%;
-  padding: 14px;
-  border-radius: 12px;
-  border: none;
-  font-size: 16px;
-  background: #2a2a2a;
-  color: white;
 }
+
+.form-row select,
+.form-row input,
 .form-row button {
   width: 100%;
-  padding: 14px;
-  font-size: 16px;
+  height: 52px;
+  border-radius: 14px;
+  border: none;
+  font-size: 15px;
+  box-sizing: border-box;
 }
+
+.form-row select,
+.form-row input {
+  padding: 0 14px;
+  background: rgba(255,255,255,0.08);
+  color: white;
+}
+
+.form-row input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.form-row button {
+  background: linear-gradient(90deg,#ff00cc,#8a2be2);
+  color: white;
+  font-weight: bold;
+}
+
 .result-box {
-  margin-top: 20px;
+  margin-top: 18px;
 }
+
 .key {
-  font-size: 18px;
+  font-size: 16px;
   color: #00ffcc;
-  word-break: break-all;
+  word-break: break-word;
+  padding: 10px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+#expire{
+  margin-top:10px;
+  font-size:14px;
+  color:#ccc;
 }
 .list {
   text-align: left;
@@ -176,23 +214,44 @@ button {
   .container {
     flex-direction: row;
   }
+
   .sidebar {
     width: 220px;
     flex-direction: column;
   }
+
   .sidebar h2 {
     display: block;
   }
+
   .sidebar button {
     width: 100%;
   }
-  .form-row {
-    flex-direction: row;
+
+  .create-card{
+    padding:30px;
+    max-width:500px;
   }
-  .form-row button {
-    width: auto;
+
+  .form-row{
+    flex-direction:row;
+    align-items:center;
+  }
+
+  .form-row select{
+    flex:1;
+  }
+
+  .form-row input{
+    width:170px;
+  }
+
+  .form-row button{
+    width:auto;
+    padding:0 22px;
   }
 }
+
 .file-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -228,25 +287,61 @@ button {
   background: rgba(0, 204, 255, 0.2);
   transform: scale(1.05);
 }
+#userInfo {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 100000;
+
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  padding: 8px 14px;
+  border-radius: 12px;
+
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
+
+  color: #00ffcc;
+  box-shadow: 0 0 10px #00ffcc55;
+
+  transition: 0.3s;
+}
+
+#userInfo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ffccaa;
+}
+.kick-btn {
+  padding: 6px 12px;        /* nhỏ lại */
+  font-size: 12px;
+  border-radius: 8px;
+
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  font-weight: 600;
+
+  background: rgba(255, 0, 60, 0.15);
+  color: #ff4d6d;
+
+  backdrop-filter: blur(6px);
+  transition: 0.2s;
+}
+
+.kick-btn:hover {
+  background: rgba(255, 0, 60, 0.3);
+  color: white;
+  box-shadow: 0 0 10px #ff003c88;
+}
+
+.kick-btn:active {
+  transform: scale(0.92);
+}
 </style>
 </head>
 <body>
-<div id="maintenanceBox" style="
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.95);
-  color: #fff;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  z-index: 999999;
-  font-size: 20px;
-  padding: 20px;
-">
-  ⚠️ Warning: Admin đã khóa Server Key để update<br>
-  Dự tính 15h sẽ mở lại
-</div>
+<div id="userInfo">Nguyễn Đình Quân ( Brian Cheat IOS )</div>
 <button id="openMenu" style="
   position:fixed;
   top:15px;
@@ -276,7 +371,6 @@ button {
 style="background:none;font-size:20px;">✖</button>
       <h2>API KEY BRIAN</h2>
       <button onclick="showTab('create')">🔑 Tạo Key</button>
-      <button onclick="showTab('files')">📂 Link File</button>
       <button onclick="showTab('device')">💻 Thông tin máy</button>
       <button onclick="showTab('history')">📜 Lịch sử key</button>
       <button onclick="showTab('loginlog')">🔐 Lịch sử login</button>
@@ -295,12 +389,10 @@ style="background:none;font-size:20px;">✖</button>
           <option value="7">7 ngày</option>
           <option value="10">10 ngày</option>
           <option value="15">15 ngày</option>
-          <option value="20">20 ngày</option>
-          <option value="25">25 ngày</option>
           <option value="30">30 ngày</option>
           <option value="365">365 ngày</option>
         </select>
-         <input id="maxDevices" type="number" placeholder="Số thiết bị (1-500)" min="1" max="500">
+         <input id="maxDevices" type="number" placeholder="Số thiết bị (1-5000)" min="1" max="5000">
         <button onclick="createKey()">Tạo Key</button>
       </div>
       <div class="result-box">
@@ -313,55 +405,6 @@ style="background:none;font-size:20px;">✖</button>
       </button>
         <div id="expire"></div>
 </div>
-    </div>
-
-  </div>
-</div>
-<div id="tab-files" class="card tab">
-  <h2>📂 Link File</h2>
-  <div class="file-grid">
-    <div class="file-card">
-      <h3>🧠 Tuấn Anh V1 </h3>
-
-      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/agv29fpkz1u91av/AIMLOCKMODUN.apk/file')">
-        📥 Aim Mode V1 APK
-      </div>
-
-      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/4dzqdujfi4d8vyk/AIMLOCKMODE.mobileconfig/file')">
-        ⚙️ Aim Mode V1 Config
-      </div>
-    </div>
-      <h3>🧠 Tuấn Anh V2 </h3>
-
-      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/nes31vl9bh53rgl/Aim+Mode+V2.apk/file')">
-        📥 Aim Mode V2 APK
-      </div>
-
-      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/4dzqdujfi4d8vyk/AIMLOCKMODE.mobileconfig/file')">
-        ⚙️ Aim Mode V2 Config
-      </div>
-    </div>
-    <div class="file-card">
-      <h3>🔥 Minh Nhật IOS V1</h3>
-
-      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/1krpe0dpgo4k8bl/AimHeadMinhNhat.apk/file')">
-        📥 AimHead V1 APK
-      </div>
-
-      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/1krpe0dpgo4k8bl/AimHeadMinhNhat.apk/file')">
-        ⚙️ AimHead V1 Config
-      </div>
-    </div>
-  <div class="file-card">
-      <h3>🔥 Minh Nhật IOS V2</h3>
-
-      <div class="file-item" onclick="openLink('https://www.mediafire.com/file/63y0sp8s41v6apb/Aim_Head_V2.apk/file')">
-        📥 AimHead V2 APK
-      </div>
-
-      <div class="file-item" onclick="openLink('hhttps://www.mediafire.com/file/35pty58zz2r7d7q/Aim_HeadV2.mobileconfig/file')">
-        ⚙️ AimHead V2 Config
-      </div>
     </div>
 
   </div>
@@ -379,16 +422,34 @@ style="background:none;font-size:20px;">✖</button>
       </div>
 
       <!-- LOGIN LOG -->
-      <div id="tab-loginlog" class="card tab">
-        <h2>🔐 Lịch sử login</h2>
-        <div id="loginList" class="list"></div>
-      </div>
+<div id="tab-loginlog" class="card tab">
+  <h2>🔐 Lịch sử login</h2>
 
-    </div>
-  </div>
+  <div id="loginList" class="list"></div>
+
+  <!-- KHU VỰC ADMIN -->
+<div style="margin-top:15px;display:flex;gap:8px;flex-wrap:wrap;">
+  <button class="kick-btn" onclick="kickUser('tanh')">🚫 Tuấn Anh</button>
+  <button class="kick-btn" onclick="kickUser('minhnhatonetop@gmail.com')">🚫 Minh Nhật</button>
 </div>
+</div>
+    </div>
+    </div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script>
-const MAINTENANCE_MODE = true; // bật = true, tắt = false
+const firebaseConfig = {
+  apiKey: "AIzaSyAMI2lpIbfAIP-WZWboSPTmDHK086Rozh4",
+  authDomain: "api-key-app-3afab.firebaseapp.com",
+  projectId: "api-key-app-3afab",
+  storageBucket: "api-key-app-3afab.firebasestorage.app",
+  messagingSenderId: "171570451598",
+  appId: "1:171570451598:web:1234567890abcdef"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 let logoutTimer;
 const AUTO_LOGOUT_TIME = 5 * 60 * 1000;
 function resetLogoutTimer() {
@@ -405,19 +466,28 @@ const ACCOUNTS = [
   { user: atob("dGFuaA=="), pass: atob("MjAwOQ==") },
   { user: atob("YnJpYW4="), pass: atob("MTQwNzIwMDg=") }
 ];
-function login() {
-    if (MAINTENANCE_MODE) {
-    alert("Server đang bảo trì!");
-    return;
-  }
+async function login() {
   const u = user.value;
   const p = pass.value;
+
   const found = ACCOUNTS.find(acc => acc.user === u && acc.pass === p);
+
   if (found) {
+    localStorage.setItem("currentUser", u);
     localStorage.setItem("expireTime", Date.now() + AUTO_LOGOUT_TIME);
-    let logs = JSON.parse(localStorage.getItem("loginLogs") || "[]");
-    logs.push(u + " - " + new Date().toLocaleString());
-    localStorage.setItem("loginLogs", JSON.stringify(logs));
+
+    // 🔥 LƯU FIREBASE
+    await db.collection("logins").add({
+      user: u,
+      time: new Date().toLocaleString(),
+      device: navigator.userAgent
+    });
+    // tạo session user
+await db.collection("sessions").doc(u).set({
+  active: true,
+  lastLogin: Date.now()
+});
+
     init();
   } else {
     err.innerText = "Sai tài khoản!";
@@ -435,67 +505,111 @@ function init() {
   loadHistory();
   loadLoginLog();
   resetLogoutTimer();
+  watchSession();
 }
 function showTab(name) {
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   document.getElementById("tab-" + name).classList.add("active");
 }
 async function createKey() {
-    if (MAINTENANCE_MODE) {
-    alert("Server đang bảo trì!");
-    return;
-  }
   const days = document.getElementById("days").value;
   let maxDevices = parseInt(document.getElementById("maxDevices").value || "1");
+
   if (maxDevices < 1 || maxDevices > 500) {
     alert("Số thiết bị phải từ 1-500");
     return;
   }
+
   const res = await fetch(
     `https://api-server-key.tranphat1357t.workers.dev/api/create?admin=BRIAN_2008&days=${days}&maxDevices=${maxDevices}`
   );
+
   const data = await res.json();
+
   if (data.ok) {
     result.innerText = data.key;
+
     if (data.data.expiresAt) {
       expire.innerText = "Hết hạn: " + new Date(data.data.expiresAt).toLocaleString();
     }
-    let history = JSON.parse(localStorage.getItem("keyHistory") || "[]");
-    history.push({
+
+    const user = localStorage.getItem("currentUser");
+
+    // 🔥 LƯU FIREBASE (KEY = DOCUMENT ID)
+    await db.collection("keys").doc(data.key).set({
+      user: user,
       key: data.key,
-      time: new Date().toLocaleString(),
+      time: Date.now(),
       devices: maxDevices
     });
-    localStorage.setItem("keyHistory", JSON.stringify(history));
+
     loadHistory();
   }
 }
-function loadHistory() {
-  let h = JSON.parse(localStorage.getItem("keyHistory") || "[]");
-  historyList.innerHTML = h.map(x => `
-    <div style="display:flex;justify-content:space-between;align-items:center;">   
+async function loadHistory() {
+  const user = localStorage.getItem("currentUser");
+
+const snapshot = await db
+  .collection("keys")
+  .where("user", "==", user)
+  .get();
+
+  historyList.innerHTML = "";
+
+  snapshot.forEach(doc => {
+    const x = doc.data();
+
+    historyList.innerHTML += `
+      <div style="display:flex;justify-content:space-between;align-items:center;">   
+        <div>
+          🔑 ${x.key}<br>
+          🕒 ${new Date(x.time).toLocaleString()}
+        </div>
+        <button onclick="deleteKey('${x.key}')"
+          style="background:red;padding:8px 12px;border-radius:8px;font-size:12px;">
+          Xóa
+        </button>
+      </div>
+      <hr>
+    `;
+  });
+}
+async function deleteKey(key) {
+  if (!confirm("Xóa key này khỏi Firebase?")) return;
+
+  await db.collection("keys").doc(key).delete();
+
+  alert("✅ Đã xóa key khỏi Firebase");
+  loadHistory();
+}
+async function loadLoginLog() {
+  const snapshot = await db
+    .collection("logins")
+    .orderBy("time", "desc")
+    .get();
+
+  let countMap = {};
+  let logsHTML = "";
+
+  snapshot.forEach(doc => {
+    const x = doc.data();
+    if (!countMap[x.user]) {
+      countMap[x.user] = 0;
+    }
+    countMap[x.user]++;
+    logsHTML += `
       <div>
-        🔑 ${x.key}<br>
+        🟢 ${x.user}<br>
         🕒 ${x.time}
       </div>
-      <button onclick="revokeKey('${x.key}')" 
-        style="
-          background:red;
-          padding:8px 12px;
-          border-radius:8px;
-          font-size:12px;
-        ">
-        Khóa Key
-      </button>
-    </div>
-    <hr>
-  `).join("");
-}
-function loadLoginLog() {
-  let l = JSON.parse(localStorage.getItem("loginLogs") || "[]");
-  loginList.innerHTML = l.map(x =>
-    `<div>🟢 ${x}</div><hr>`
-  ).join("");
+      <hr>
+    `;
+  });
+  let statsHTML = "<h3>📊 Thống kê login</h3>";
+  for (let user in countMap) {
+    statsHTML += `👤 ${user}: ${countMap[user]} lần<br>`;
+  }
+  loginList.innerHTML = statsHTML + "<hr>" + logsHTML;
 }
 function loadDevice() {
   deviceInfo.innerHTML = `
@@ -506,12 +620,19 @@ function loadDevice() {
 }
 async function revokeKey(key) {
   if (!confirm("Bạn chắc chắn muốn khóa key này?")) return;
+
   const res = await fetch(
     `https://api-server-key.tranphat1357t.workers.dev/api/revoke?admin=BRIAN_2008&key=${key}`
   );
+
   const data = await res.json();
+
   if (data.ok) {
-    alert("✅ Đã khóa key: " + key);
+    // 🔥 XOÁ TRONG FIREBASE LUÔN
+    await db.collection("keys").doc(key).delete();
+
+    alert("✅ Đã khóa & xóa key");
+    loadHistory();
   } else {
     alert("❌ Lỗi: " + data.error);
   }
@@ -531,11 +652,6 @@ function copyKey() {
     });
 }
 window.addEventListener("load", () => {
-    if (MAINTENANCE_MODE) {
-    document.getElementById("maintenanceBox").style.display = "flex";
-    document.body.style.overflow = "hidden";
-    return; // ⛔ dừng toàn bộ script phía dưới
-  }
   const sidebar = document.querySelector(".sidebar");
   const openBtn = document.getElementById("openMenu");
   openBtn.onclick = () => {
@@ -552,6 +668,39 @@ window.addEventListener("load", () => {
 });
 function openLink(url) {
   window.open(url, "_blank");
+}
+async function kickUser(targetUser) {
+  const currentUser = localStorage.getItem("currentUser");
+
+  // chỉ admin mới được kick
+  const ADMIN = "brian";
+
+if (currentUser !== ADMIN) {
+    alert("❌ Bạn không phải admin!");
+    return;
+  }
+
+  await db.collection("sessions").doc(targetUser).update({
+    active: false
+  });
+
+  alert("✅ Đã kick " + targetUser);
+}
+function watchSession() {
+  const user = localStorage.getItem("currentUser");
+  if (!user) return;
+
+  db.collection("sessions").doc(user)
+    .onSnapshot(doc => {
+      if (!doc.exists) return;
+
+      const data = doc.data();
+
+      if (data.active === false) {
+        alert("🚫 Bạn đã bị admin kick!");
+        logout();
+      }
+    });
 }
 </script>
 </body>
