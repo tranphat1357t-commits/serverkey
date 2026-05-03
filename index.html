@@ -6,6 +6,22 @@
 <title>𝑨𝑷𝑰 𝑲𝑬𝒀 𝑩𝑹𝑰𝑨𝑵</title>
 <style>
 body {
+  <div id="maintenanceBox" style="
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  color: #fff;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 999999;
+  font-size: 20px;
+  padding: 20px;
+">
+  ⚠️ Warning: Admin đã khóa Server Key để update<br>
+  Dự tính 15h sẽ mở lại
+</div>
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: url('https://sf-static.upanhlaylink.com/img/image_202604292be7d99f6d81d241b901050384d59134.jpg') no-repeat center center fixed;
@@ -372,6 +388,7 @@ style="background:none;font-size:20px;">✖</button>
   </div>
 </div>
 <script>
+const MAINTENANCE_MODE = true; // bật = true, tắt = false
 let logoutTimer;
 const AUTO_LOGOUT_TIME = 5 * 60 * 1000;
 function resetLogoutTimer() {
@@ -389,6 +406,10 @@ const ACCOUNTS = [
   { user: atob("YnJpYW4="), pass: atob("MTQwNzIwMDg=") }
 ];
 function login() {
+    if (MAINTENANCE_MODE) {
+    alert("Server đang bảo trì!");
+    return;
+  }
   const u = user.value;
   const p = pass.value;
   const found = ACCOUNTS.find(acc => acc.user === u && acc.pass === p);
@@ -420,6 +441,10 @@ function showTab(name) {
   document.getElementById("tab-" + name).classList.add("active");
 }
 async function createKey() {
+    if (MAINTENANCE_MODE) {
+    alert("Server đang bảo trì!");
+    return;
+  }
   const days = document.getElementById("days").value;
   let maxDevices = parseInt(document.getElementById("maxDevices").value || "1");
   if (maxDevices < 1 || maxDevices > 500) {
@@ -506,6 +531,11 @@ function copyKey() {
     });
 }
 window.addEventListener("load", () => {
+    if (MAINTENANCE_MODE) {
+    document.getElementById("maintenanceBox").style.display = "flex";
+    document.body.style.overflow = "hidden";
+    return; // ⛔ dừng toàn bộ script phía dưới
+  }
   const sidebar = document.querySelector(".sidebar");
   const openBtn = document.getElementById("openMenu");
   openBtn.onclick = () => {
