@@ -392,7 +392,7 @@ style="background:none;font-size:20px;">✖</button>
           <option value="30">30 ngày</option>
           <option value="365">365 ngày</option>
         </select>
-         <input id="maxDevices" type="number" placeholder="Số thiết bị (1-5000)" min="1" max="5000">
+         <input id="maxDevices" type="number" placeholder="Số thiết bị (1-10000)" min="1" max="10000">
         <button onclick="createKey()">Tạo Key</button>
       </div>
       <div class="result-box">
@@ -516,8 +516,8 @@ async function createKey() {
   const days = document.getElementById("days").value;
   let maxDevices = parseInt(document.getElementById("maxDevices").value || "1");
 
-  if (maxDevices < 1 || maxDevices > 500) {
-    alert("Số thiết bị phải từ 1-500");
+  if (maxDevices < 1 || maxDevices > 10000) {
+    alert("Số thiết bị phải từ 1-10000");
     return;
   }
 
