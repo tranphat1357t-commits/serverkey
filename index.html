@@ -521,7 +521,7 @@ async function createKey() {
   }
 
   const res = await fetch(
-    `https://api-server-key.tranphat1357t.workers.dev/api/create?admin=BRIAN_2008&days=${days}&maxDevices=${maxDevices}`
+    `https://serverkeybrian.quannguyendinh508.workers.dev//api/create?admin=BRIAN_2008&days=${days}&maxDevices=${maxDevices}`
   );
 
   const data = await res.json();
@@ -622,7 +622,7 @@ async function revokeKey(key) {
   if (!confirm("Bạn chắc chắn muốn khóa key này?")) return;
 
   const res = await fetch(
-    `https://api-server-key.tranphat1357t.workers.dev/api/revoke?admin=BRIAN_2008&key=${key}`
+    `https://serverkeybrian.quannguyendinh508.workers.dev//api/revoke?admin=BRIAN_2008&key=${key}`
   );
 
   const data = await res.json();
